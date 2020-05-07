@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let urls = [`images/img02.jpg`, `images/img03.jpg`, `images/img04.jpg`];
+    function preloadImage(url,fn) {
+        let oImg = document.createElement("img");
+        oImg.src = url;
+        oImg.onload = function () {
+            fn(oImg);
+        }
+    }
+
+    function preloadImages(urls, fn) {
+        let oImages = [];
+        let total = 0;
+        for(let i = 0; i < urls.length; i++){
+            let url = urls[i];
+            preloadImage(url,function (img) {
+                oImages.push(img);
+            });
+            total++;
+            if(total === urls.length-1){
+                fn(oImages);
+            }
+        }
+
+    }
+</script>
+</body>
+</html>
